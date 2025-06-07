@@ -29,4 +29,48 @@ public class Transfers {
     @Column(name = "transfer_date")
     private LocalDateTime transferDate;
 
+    public Transfers() {
+    }
+
+    public UUID getTransferId() {
+        return transferId;
+    }
+
+    public void setTransferId(UUID transferId) {
+        this.transferId = transferId;
+    }
+
+    public Wallet getSender() {
+        return sender;
+    }
+
+    public void setSender(Wallet sender) {
+        this.sender = sender;
+    }
+
+    public Wallet getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(Wallet receiver) {
+        this.receiver = receiver;
+    }
+
+    public BigDecimal getAmountTransferred() {
+        return amountTransferred;
+    }
+
+    public void setAmountTransferred(BigDecimal amountTransferred) {
+        this.amountTransferred = amountTransferred;
+    }
+
+    public LocalDateTime getTransferDate() {
+        return transferDate;
+    }
+
+    public void setTransferDate(LocalDateTime transferDate) {
+        this.transferDate = transferDate;
+    }
+
+
 }
