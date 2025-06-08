@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_deposits")
-public class Deposits {
+public class Deposit {
 
     @Id
     @Column(name = "deposit_id", unique = true)
@@ -28,7 +28,7 @@ public class Deposits {
     @Column(name = "ip_address")
     private String ipAddress;
 
-    public Deposits() {
+    public Deposit() {
     }
 
     public UUID getDepositId() {

@@ -27,7 +27,6 @@ public class GlobalExceptionHandler {
             pd.setDetail("The request contains invalid parameters.");
             pd.setProperty("invalidParams", invalidParams);
 
-
         return pd;
     }
 

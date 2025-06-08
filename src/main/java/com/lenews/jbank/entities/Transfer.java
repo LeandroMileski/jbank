@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_transfers")
-public class Transfers {
+public class Transfer {
 
     @Id
     @Column(name = "transfer_id")
@@ -29,7 +29,7 @@ public class Transfers {
     @Column(name = "transfer_date")
     private LocalDateTime transferDate;
 
-    public Transfers() {
+    public Transfer() {
     }
 
     public UUID getTransferId() {

@@ -1,7 +1,9 @@
 package com.lenews.jbank.controller;
 
 import com.lenews.jbank.controller.dto.CreateWalletDto;
+import com.lenews.jbank.controller.dto.DepositMoneyDto;
 import com.lenews.jbank.exception.WalletDataAlreadyExistsException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,18 @@ public class WalletController {
         return deleted ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.notFound().build();
+    }
+
+    @PostMapping(path = "/{walletId}/deposits")
+    public ResponseEntity<Void> depositMoney(@PathVariable("walletId") UUID walletId,
+                                             @RequestBody @Valid DepositMoneyDto dto,
+                                             HttpServletRequest servletRequest) {
+        walletService.depositWallet(
+                walletId,
+                dto,
+                servletRequest.getAttribute("x-user-ip").toString()
+        );
+        return ResponseEntity.ok().build();
     }
 
 

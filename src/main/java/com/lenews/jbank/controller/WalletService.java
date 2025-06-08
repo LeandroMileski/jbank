@@ -1,22 +1,33 @@
 package com.lenews.jbank.controller;
 
 import com.lenews.jbank.controller.dto.CreateWalletDto;
+import com.lenews.jbank.controller.dto.DepositMoneyDto;
+import com.lenews.jbank.entities.Deposit;
 import com.lenews.jbank.entities.Wallet;
 import com.lenews.jbank.exception.DeleteWalletException;
+import com.lenews.jbank.exception.DepositException;
 import com.lenews.jbank.exception.WalletDataAlreadyExistsException;
+import com.lenews.jbank.exception.WalletNotFoundException;
+import com.lenews.jbank.repository.DepositRepository;
 import com.lenews.jbank.repository.WalletRepository;
 import jakarta.validation.ValidationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
 public class WalletService {
     private final WalletRepository walletRepository;
+    private final DepositRepository depositRepository;
 
-    public WalletService(WalletRepository walletRepository) {
+    public WalletService(WalletRepository walletRepository, DepositRepository depositRepository) {
         this.walletRepository = walletRepository;
+        this.depositRepository = depositRepository;
     }
 
     public Wallet createWallet(CreateWalletDto dto) {
@@ -46,4 +57,24 @@ public class WalletService {
         }
         return wallet.isPresent();
     }
-}
+
+    @Transactional
+    public void depositWallet(UUID walletId, DepositMoneyDto dto, String ipAddress) {
+
+        var wallet = walletRepository.findById(walletId)
+                .orElseThrow(() -> new WalletNotFoundException("Wallet not found with ID: " + walletId));
+
+        var deposit = new Deposit();
+        deposit.setWallet(wallet);
+        deposit.setAmmountDeposited(dto.amountDeposited());
+        deposit.setIpAddress(ipAddress);
+        deposit.setDepositDate(LocalDateTime.now());
+        depositRepository.save(deposit);
+
+        wallet.setBalance(wallet.getBalance().add(dto.amountDeposited()));
+        walletRepository.save(wallet);
+
+    }
+    }
+
+
