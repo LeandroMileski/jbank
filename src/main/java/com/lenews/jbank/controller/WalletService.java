@@ -2,11 +2,14 @@ package com.lenews.jbank.controller;
 
 import com.lenews.jbank.controller.dto.CreateWalletDto;
 import com.lenews.jbank.entities.Wallet;
+import com.lenews.jbank.exception.DeleteWalletException;
 import com.lenews.jbank.exception.WalletDataAlreadyExistsException;
 import com.lenews.jbank.repository.WalletRepository;
+import jakarta.validation.ValidationException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Service
 public class WalletService {
@@ -30,5 +33,17 @@ public class WalletService {
 
         return walletRepository.save(wallet);
 
+    }
+
+    public boolean deleteWallet(UUID walletId) {
+        var wallet = walletRepository.findById(walletId);
+
+        if(wallet.isPresent()) {
+            if (wallet.get().getBalance().compareTo(BigDecimal.ZERO) != 0) {
+                throw new DeleteWalletException("Cannot delete wallet with non-zero balance. Current balance: " + wallet.get().getBalance());
+            }
+            walletRepository.deleteById(walletId);
+        }
+        return wallet.isPresent();
     }
 }
