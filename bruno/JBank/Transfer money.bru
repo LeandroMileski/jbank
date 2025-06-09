@@ -1,0 +1,17 @@
+meta {
+  name: Transfer money
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8080/wallets/1075ca05-69f6-4652-bdda-7bb71eb86d81/deposits
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "amountDeposited":"20.00"
+  }
+}
