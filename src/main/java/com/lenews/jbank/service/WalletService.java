@@ -1,20 +1,16 @@
-package com.lenews.jbank.controller;
+package com.lenews.jbank.service;
 
 import com.lenews.jbank.controller.dto.CreateWalletDto;
 import com.lenews.jbank.controller.dto.DepositMoneyDto;
 import com.lenews.jbank.entities.Deposit;
 import com.lenews.jbank.entities.Wallet;
 import com.lenews.jbank.exception.DeleteWalletException;
-import com.lenews.jbank.exception.DepositException;
 import com.lenews.jbank.exception.WalletDataAlreadyExistsException;
 import com.lenews.jbank.exception.WalletNotFoundException;
 import com.lenews.jbank.repository.DepositRepository;
 import com.lenews.jbank.repository.WalletRepository;
-import jakarta.validation.ValidationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -2,10 +2,9 @@ package com.lenews.jbank.controller;
 
 import com.lenews.jbank.controller.dto.CreateWalletDto;
 import com.lenews.jbank.controller.dto.DepositMoneyDto;
-import com.lenews.jbank.exception.WalletDataAlreadyExistsException;
+import com.lenews.jbank.service.WalletService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
