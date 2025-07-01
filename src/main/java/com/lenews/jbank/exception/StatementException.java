@@ -1,7 +1,21 @@
 package com.lenews.jbank.exception;
 
-public class StatementException extends RuntimeException {
-    public StatementException(String message) {
-        super(message);
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
+
+public class StatementException extends JBankException {
+    private final String detail;
+
+    public StatementException(String detail) {
+        super(detail);
+        this.detail = detail;
+    }
+
+    @Override
+    public ProblemDetail toProblemDetail() {
+        var pd = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        pd.setTitle("Statement Error");
+
+        return pd;
     }
 }

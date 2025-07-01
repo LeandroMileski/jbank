@@ -5,13 +5,15 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/wallets/1075ca05-69f6-4652-bdda-7bb71eb86d81/deposits
+  url: http://localhost:8080/transfers
   body: json
   auth: inherit
 }
 
 body:json {
   {
-    "amountDeposited":"20.00"
+    "sender": "1075ca05-69f6-4652-bdda-7bb71eb86d81",
+    "receiver": "fd55bed7-680e-4590-a044-6763fbc3546b",
+    "amountTransferred": "100.00"
   }
 }

@@ -1,4 +1,11 @@
 package com.lenews.jbank.controller.dto;
 
-public record WalletDto() {
+import java.math.BigDecimal;
+import java.util.UUID;
+
+public record WalletDto(UUID walletId,
+                        String cpf,
+                        String name,
+                        String email,
+                        BigDecimal balance) {
 }

@@ -1,4 +1,10 @@
 package com.lenews.jbank.controller.dto;
 
-public class StatementDto {
+import java.util.List;
+
+public record StatementDto(WalletDto wallet,
+                           List<StatementItemDto> statements,
+                           PaginationDto pagination
+                           ) {
+
 }

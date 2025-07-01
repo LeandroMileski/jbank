@@ -1,4 +1,14 @@
 package com.lenews.jbank.controller.dto;
 
-public record StatementItemDto() {
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+public record StatementItemDto(String transactionId,
+                               String type,
+                               String literal,
+                               BigDecimal value,
+                               LocalDateTime dateTime,
+                               StatementOperation operation
+                               ) {
 }
